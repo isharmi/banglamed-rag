@@ -6,7 +6,6 @@ Responsibilities:
 - Load metadata
 - Read PDF documents
 """
-
 from pathlib import Path
 import pandas as pd
 
@@ -35,3 +34,30 @@ def load_pdf(pdf_path: Path):
     """
     loader = PyPDFLoader(str(pdf_path))
     return loader.load()
+
+
+
+def enrich_metadata(chunks, metadata_df):
+    """
+    Attach metadata.csv information to each chunk.
+    """
+
+    metadata_lookup = {
+        row["filename"]: row
+        for _, row in metadata_df.iterrows()
+    }
+
+    for chunk in chunks:
+
+        filename = Path(chunk.metadata["source"]).name
+
+        if filename in metadata_lookup:
+
+            row = metadata_lookup[filename]
+
+            chunk.metadata["organization"] = row["source"]
+            chunk.metadata["category"] = row["category"]
+            chunk.metadata["year"] = int(row["year"])
+            chunk.metadata["title"] = row["title"]
+
+    return chunks
