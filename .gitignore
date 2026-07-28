@@ -1,0 +1,28 @@
+# Virtual Environment
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+
+# Vector database
+vectorstore/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
