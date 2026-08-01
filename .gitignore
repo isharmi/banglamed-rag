@@ -25,4 +25,4 @@ vectorstore/
 .ipynb_checkpoints/
 
 # Logs
-*.log
+*.log.DS_Store
